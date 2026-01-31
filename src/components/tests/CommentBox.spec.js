@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import { CommentBox } from '../CommentBox';
 import { text } from 'cheerio';
 
-describe('CommentBox component', () =>{
+describe('CommentBox component', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = mount(<CommentBox />);
@@ -21,32 +21,35 @@ describe('CommentBox component', () =>{
         expect(wrapper.find('button').length).toBe(1);
     });
 
-    test('textarea captures user input', () => {
-        // find the textarea element
-        const textarea = wrapper.find('textarea');
-        // call simulate on the textarea to simulate a user event
-        textarea.simulate('change', { target: { value: 'new comment' } });
-        // force a re-render to reflect the new state
-        wrapper.update();
-        expect(wrapper.find('textarea').text()).toBe('new comment');
-        //validate the state using prop
-        expect(wrapper.find('textarea').prop('value')).toBe('new comment');
-    });
+    describe('textarea', () => {
 
-    test('submit form', () => {
-        const form = wrapper.find('form');
+        let textarea;
+        const userComment = 'user added comment';
+        beforeEach(() =>{
+            // find the textarea element
+            textarea = wrapper.find('textarea');
+            // call simulate on the textarea to simulate a user event
+            textarea.simulate('change', { target: { value: userComment } });
+            // force a re-render to reflect the new state
+            wrapper.update();
+        });
 
-        // add a comment first
-        const textarea = wrapper.find('textarea');
-        textarea.simulate('change', { target: { value: 'another comment' } });
-        wrapper.update();
-        // validate the state update
-        expect(wrapper.find('textarea').prop('value')).toBe('another comment');
+        test('textarea captures user input', () => {
+            expect(wrapper.find('textarea').text()).toBe(userComment);
+            //validate the state using prop
+            expect(wrapper.find('textarea').prop('value')).toBe(userComment);
+        });
 
-        // submit the form
-        form.simulate('submit');
-        wrapper.update();
-        // textarea should be cleared after submit
-        expect(wrapper.find('textarea').prop('value')).toBe('');
+        test('submit form', () => {
+            // validate the state update
+            expect(wrapper.find('textarea').prop('value')).toBe(userComment);
+
+            const form = wrapper.find('form');
+            // submit the form
+            form.simulate('submit');
+            wrapper.update();
+            // textarea should be cleared after submit
+            expect(wrapper.find('textarea').prop('value')).toBe('');
+        });
     });
 });
