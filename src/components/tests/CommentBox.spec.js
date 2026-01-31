@@ -27,6 +27,8 @@ describe('CommentBox component', () =>{
         textarea.simulate('change', { target: { value: 'new comment' } });
         // force a re-render to reflect the new state
         wrapper.update();
-        expect(textarea.text()).toBe('new comment');
+        expect(wrapper.find('textarea').text()).toBe('new comment');
+        //validate the state using prop
+        expect(wrapper.find('textarea').prop('value')).toBe('new comment');
     });
 });
