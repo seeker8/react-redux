@@ -19,4 +19,14 @@ describe('CommentBox component', () =>{
         expect(wrapper.find('textarea').length).toBe(1);
         expect(wrapper.find('button').length).toBe(1);
     });
+
+    test('textarea captures user input', () => {
+        // find the textarea element
+        const textarea = wrapper.find('textarea');
+        // call simulate on the textarea to simulate a user event
+        textarea.simulate('change', { target: { value: 'new comment' } });
+        // force a re-render to reflect the new state
+        wrapper.update();
+        expect(textarea.text()).toBe('new comment');
+    });
 });
