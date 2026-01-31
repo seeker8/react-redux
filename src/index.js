@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 import { rootReducer } from './reducers/index';
 
 ReactDOM.render((
-    <Provider store={createStore(rootReducer, [])}>
+    <Provider store={createStore(rootReducer, {})}>
         <App />
     </Provider>
 ), document.getElementById('root'));
