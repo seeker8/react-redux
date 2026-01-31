@@ -2,6 +2,7 @@ import React from 'react';
 // use mount for full DOM rendering
 import { mount } from 'enzyme';
 import { CommentBox } from '../CommentBox';
+import { text } from 'cheerio';
 
 describe('CommentBox component', () =>{
     let wrapper;
@@ -30,5 +31,22 @@ describe('CommentBox component', () =>{
         expect(wrapper.find('textarea').text()).toBe('new comment');
         //validate the state using prop
         expect(wrapper.find('textarea').prop('value')).toBe('new comment');
+    });
+
+    test('submit form', () => {
+        const form = wrapper.find('form');
+
+        // add a comment first
+        const textarea = wrapper.find('textarea');
+        textarea.simulate('change', { target: { value: 'another comment' } });
+        wrapper.update();
+        // validate the state update
+        expect(wrapper.find('textarea').prop('value')).toBe('another comment');
+
+        // submit the form
+        form.simulate('submit');
+        wrapper.update();
+        // textarea should be cleared after submit
+        expect(wrapper.find('textarea').prop('value')).toBe('');
     });
 });
