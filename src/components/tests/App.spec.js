@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import { App } from '../App';
+import { CommentBox } from '../CommentBox';
 
-test('CommentBox is rendered',  () => {
-    const container = document.createElement('div');
-    ReactDOM.render(<App />, container);
-    expect(container.innerHTML).toContain('CommentBox component');
-    ReactDOM.unmountComponentAtNode(container);
+test('App is rendered',  () => {
+    // renders App without rendering its children
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(CommentBox).length).toEqual(1);
 });
