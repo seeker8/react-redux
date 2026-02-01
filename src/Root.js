@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { rootReducer } from './reducers/index';
 
-export const Root = ({ children }) => {
+export const Root = ({ children, initialState = [] }) => {
     return (
-        <Provider store={createStore(rootReducer, {})}>
+        <Provider store={createStore(rootReducer, {comments: initialState})}>
             {children}
         </Provider>
     );
