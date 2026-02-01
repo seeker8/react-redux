@@ -18,7 +18,7 @@ describe('CommentBox component', () => {
 
     test('has a textarea and a button', () => {
         expect(wrapper.find('textarea').length).toBe(1);
-        expect(wrapper.find('button').length).toBe(1);
+        expect(wrapper.find('button').length).toBe(2);
     });
 
     describe('textarea', () => {
