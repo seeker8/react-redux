@@ -2,12 +2,12 @@ import React from 'react';
 // use mount for full DOM rendering
 import { mount } from 'enzyme';
 import { CommentBox } from '../CommentBox';
-import { text } from 'cheerio';
+import  { Root } from '../../Root';
 
 describe('CommentBox component', () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = mount(<CommentBox />);
+        wrapper = mount(<Root><CommentBox /></Root>);
     });
 
     afterEach(() => {
