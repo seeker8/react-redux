@@ -6,7 +6,7 @@ import { CommentList } from '../CommnentList';
 let wrapper;
 beforeEach(() => {
     wrapper = mount(
-        <Root initialState={['Comment 1', 'Comment 2']}>
+        <Root initialState={{comments: ['Comment 1', 'Comment 2']}}>
             <CommentList />
         </Root>
     );
