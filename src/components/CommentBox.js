@@ -5,6 +5,20 @@ import * as actions from '../actions/index';
 class CommentBoxComponent extends React.Component {
     state = { comment: '' };
 
+    shouldNavigateAway() {
+        if (!this.props.auth) {
+            this.props.history.push('/');
+        }
+    }
+
+    componentDidMount() {
+        this.shouldNavigateAway();
+    }
+
+    componentDidUpdate() {
+        this.shouldNavigateAway();
+    }
+
     handleChange = (e) => {
         this.setState({ comment: e.target.value });
     }
@@ -31,4 +45,10 @@ class CommentBoxComponent extends React.Component {
     }
 }
 
-export const CommentBox = connect(null, actions)(CommentBoxComponent);
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    };
+};
+
+export const CommentBox = connect(mapStateToProps, actions)(CommentBoxComponent);
