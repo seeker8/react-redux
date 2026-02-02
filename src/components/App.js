@@ -5,7 +5,12 @@ import { Route, Link } from 'react-router-dom';
 import { CommentBox } from './CommentBox';
 import { CommentList } from './CommnentList';
 
-const NavigationComponent = ({ auth }) => {
+const NavigationComponent = ({ auth, changeAuth }) => {
+
+  const handleAuth = () => {
+    changeAuth(!auth);
+  }
+
   return (
     <nav>
       <ul style={{ "padding-left": 0 }}>
@@ -17,8 +22,8 @@ const NavigationComponent = ({ auth }) => {
         </li>
         <li style={{ display: "inline-block", padding: "0 5px" }}>
           {(auth
-            && <Link to="/auth">Sign Out</Link>)
-            || <Link to="/auth">Sign In</Link>}
+            && <button onClick={handleAuth}>Sign Out</button>)
+            || <button onClick={handleAuth}>Sign In</button>}
         </li>
       </ul>
     </nav>
