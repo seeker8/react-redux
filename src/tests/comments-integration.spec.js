@@ -1,19 +1,35 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Root } from '../Root';
-import { App } from '../components/App'
-import axios from 'axios';
+import { App } from '../components/App';
+import moxios from 'moxios';
 
-
-test('can fetch a list of comments and display them', () => {
-    axios.get = jest.fn().mockReturnValue({
-        data: [{name: 'Comment 1'}, {name: 'Comment 2'}, {name: 'Comment 3'}]
+describe('Comments App', () => {
+    let wrapper;
+    beforeEach(() => {
+        moxios.install();
+        wrapper = mount(
+            <Root>
+                <App />
+            </Root>
+        );
     });
-    const wrapper = mount(
-        <Root>
-            <App />
-        </Root>
-    );
-    wrapper.find('button[data-testid="fetch-button"]').simulate('click');
-    expect(wrapper.find('li').length).toEqual(3);
+
+    afterEach(() => {
+        wrapper.unmount();
+        moxios.uninstall();
+    });
+
+    test('can fetch a list of comments and display them', (done) => {
+        moxios.stubRequest('http://jsonplaceholder.typicode.com/comments', {
+            status: 200,
+            response: [{ name: 'Comment 1' }, { name: 'Comment 2' }, { name: 'Comment 3' }]
+        });
+        wrapper.find('button[data-testid="fetch-button"]').simulate('click');
+        setTimeout(() => {
+            wrapper.update();
+            expect(wrapper.find('li').length).toEqual(3);
+            done();
+        }, 1000);
+    });
 });
