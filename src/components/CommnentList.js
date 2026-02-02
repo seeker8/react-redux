@@ -4,8 +4,8 @@ import * as actions from '../actions';
 
 class CommentListComponent extends React.Component {
     renderComments() {
-        return this.props.comments.map((comment) => {
-            return <li key={comment}>{comment}</li>;
+        return this.props.comments.map((comment, index) => {
+            return <li key={`${comment}-${index}`}>{comment}</li>;
         });
     }
 

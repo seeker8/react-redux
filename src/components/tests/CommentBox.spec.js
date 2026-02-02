@@ -16,9 +16,9 @@ describe('CommentBox component', () => {
         wrapper.unmount();
     });
 
-    test('has a textarea and a button', () => {
+    test('has a textarea and two button', () => {
         expect(wrapper.find('textarea').length).toBe(1);
-        expect(wrapper.find('button').length).toBe(1);
+        expect(wrapper.find('button').length).toBe(2);
     });
 
     describe('textarea', () => {
