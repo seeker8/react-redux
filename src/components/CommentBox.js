@@ -1,23 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions/index';
+import { requireAuth } from './requireAuth';
 
 class CommentBoxComponent extends React.Component {
     state = { comment: '' };
-
-    shouldNavigateAway() {
-        if (!this.props.auth) {
-            this.props.history.push('/');
-        }
-    }
-
-    componentDidMount() {
-        this.shouldNavigateAway();
-    }
-
-    componentDidUpdate() {
-        this.shouldNavigateAway();
-    }
 
     handleChange = (e) => {
         this.setState({ comment: e.target.value });
@@ -45,10 +30,5 @@ class CommentBoxComponent extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.auth
-    };
-};
 
-export const CommentBox = connect(mapStateToProps, actions)(CommentBoxComponent);
+export const CommentBox = requireAuth(CommentBoxComponent)
