@@ -26,10 +26,10 @@ describe('Comments App', () => {
             response: [{ name: 'Comment 1' }, { name: 'Comment 2' }, { name: 'Comment 3' }]
         });
         wrapper.find('button[data-testid="fetch-button"]').simulate('click');
-        setTimeout(() => {
+        moxios.wait(() => {
             wrapper.update();
             expect(wrapper.find('li').length).toEqual(3);
             done();
-        }, 1000);
+        });
     });
 });
