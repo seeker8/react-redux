@@ -1,3 +1,5 @@
+[![test](https://github.com/seeker8/react-redux/actions/workflows/test.yml/badge.svg)](https://github.com/seeker8/react-redux/actions/workflows/test.yml?branch=hoc)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

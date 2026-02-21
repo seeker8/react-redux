@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions/index';
+import { requireAuth } from './requireAuth';
 
 class CommentBoxComponent extends React.Component {
     state = { comment: '' };
@@ -31,4 +30,5 @@ class CommentBoxComponent extends React.Component {
     }
 }
 
-export const CommentBox = connect(null, actions)(CommentBoxComponent);
+
+export const CommentBox = requireAuth(CommentBoxComponent)
