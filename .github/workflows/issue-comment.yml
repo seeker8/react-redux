@@ -11,6 +11,7 @@ jobs:
       - name: Comment on new issue
         uses: actions/github-script@v8
         with:
+          github-token: ${{ secrets.MY_PAT }}
           script: |
              const fs = require('fs')
              const issueBody = fs.readFileSync(".github/ISSUE_RESPONSES/comment.md", "utf8")
@@ -24,6 +25,7 @@ jobs:
         if: contains(github.event.issue.labels.*.name, 'bug')
         uses: actions/github-script@v8
         with:
+          github-token: ${{ secrets.MY_PAT }}
           script: |
             github.rest.projects.createCard({
               column_id: {{columnID}},
